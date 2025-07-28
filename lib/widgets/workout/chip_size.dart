@@ -1,0 +1,1 @@
+enum ChipSize { small, medium, large }
