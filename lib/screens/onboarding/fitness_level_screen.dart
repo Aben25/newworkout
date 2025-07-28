@@ -198,76 +198,68 @@ class _FitnessLevelScreenState extends ConsumerState<FitnessLevelScreen>
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Padding(
-      padding: const EdgeInsets.all(24.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Header
-          Text(
-            OnboardingStep.fitnessLevel.title,
-            style: theme.textTheme.headlineMedium?.copyWith(
-              fontWeight: FontWeight.bold,
-              color: theme.colorScheme.onSurface,
-            ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            OnboardingStep.fitnessLevel.description,
-            style: theme.textTheme.bodyLarge?.copyWith(
-              color: theme.colorScheme.onSurfaceVariant,
-            ),
-          ),
-          const SizedBox(height: 32),
-
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  // Cardio fitness level
-                  _buildFitnessLevelSection(
-                    title: 'Cardio Fitness Level',
-                    icon: Icons.directions_run,
-                    value: _cardioLevel,
-                    descriptions: _cardioDescriptions,
-                    onChanged: (value) {
-                      setState(() {
-                        _cardioLevel = value;
-                      });
-                      _saveData();
-                    },
-                  ),
-                  
-                  const SizedBox(height: 40),
-                  
-                  // Weightlifting fitness level
-                  _buildFitnessLevelSection(
-                    title: 'Weightlifting Experience',
-                    icon: Icons.fitness_center,
-                    value: _weightliftingLevel,
-                    descriptions: _weightliftingDescriptions,
-                    onChanged: (value) {
-                      setState(() {
-                        _weightliftingLevel = value;
-                      });
-                      _saveData();
-                    },
-                  ),
-                  
-                  const SizedBox(height: 40),
-                  
-                  // Enhanced overall fitness summary
-                  _buildEnhancedFitnessSummary(theme),
-                ],
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Simple header matching Figma
+            Text(
+              'What\'s your fitness level?',
+              style: theme.textTheme.headlineMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+                color: theme.colorScheme.onSurface,
               ),
             ),
-          ),
-        ],
+            const SizedBox(height: 8),
+            Text(
+              'Help us create workouts that match your experience',
+              style: theme.textTheme.bodyLarge?.copyWith(
+                color: theme.colorScheme.onSurfaceVariant,
+              ),
+            ),
+            const SizedBox(height: 32),
+
+            // Cardio fitness level
+            _buildSimpleFitnessSection(
+              title: 'Cardio Fitness',
+              icon: Icons.directions_run,
+              value: _cardioLevel,
+              descriptions: _cardioDescriptions,
+              onChanged: (value) {
+                setState(() {
+                  _cardioLevel = value;
+                });
+                _saveData();
+              },
+            ),
+            
+            const SizedBox(height: 32),
+            
+            // Weightlifting fitness level
+            _buildSimpleFitnessSection(
+              title: 'Strength Training',
+              icon: Icons.fitness_center,
+              value: _weightliftingLevel,
+              descriptions: _weightliftingDescriptions,
+              onChanged: (value) {
+                setState(() {
+                  _weightliftingLevel = value;
+                });
+                _saveData();
+              },
+            ),
+            
+            // Extra bottom padding to prevent overflow
+            const SizedBox(height: 80),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _buildFitnessLevelSection({
+  Widget _buildSimpleFitnessSection({
     required String title,
     required IconData icon,
     required double value,
@@ -283,49 +275,59 @@ class _FitnessLevelScreenState extends ConsumerState<FitnessLevelScreen>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Section header
+        Row(
+          children: [
+            Icon(
+              icon,
+              color: theme.colorScheme.primary,
+              size: 24,
+            ),
+            const SizedBox(width: 12),
+            Text(
+              title,
+              style: theme.textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.w600,
+                color: theme.colorScheme.onSurface,
+              ),
+            ),
+          ],
+        ),
+        
+        const SizedBox(height: 16),
+        
+        // Current level display
         Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                theme.colorScheme.primaryContainer.withValues(alpha: 0.3),
-                theme.colorScheme.secondaryContainer.withValues(alpha: 0.3),
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
+            color: currentLevel['color'].withOpacity(0.1),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(
+              color: currentLevel['color'].withOpacity(0.3),
             ),
-            borderRadius: BorderRadius.circular(16),
           ),
           child: Row(
             children: [
-              Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: theme.colorScheme.primary.withValues(alpha: 0.2),
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(
-                  icon,
-                  size: 24,
-                  color: theme.colorScheme.primary,
-                ),
+              Icon(
+                currentDescription['icon'],
+                color: currentLevel['color'],
+                size: 20,
               ),
-              const SizedBox(width: 16),
+              const SizedBox(width: 12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      title,
-                      style: theme.textTheme.titleLarge?.copyWith(
+                      currentDescription['text'],
+                      style: theme.textTheme.bodyMedium?.copyWith(
                         fontWeight: FontWeight.w600,
                         color: theme.colorScheme.onSurface,
                       ),
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'Select your current level',
-                      style: theme.textTheme.bodyMedium?.copyWith(
+                      currentDescription['detail'],
+                      style: theme.textTheme.bodySmall?.copyWith(
                         color: theme.colorScheme.onSurfaceVariant,
                       ),
                     ),
@@ -336,295 +338,38 @@ class _FitnessLevelScreenState extends ConsumerState<FitnessLevelScreen>
           ),
         ),
         
-        const SizedBox(height: 20),
+        const SizedBox(height: 16),
         
-        // Enhanced level indicator with detailed guidance
-        AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
-          padding: const EdgeInsets.all(24),
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                currentLevel['color'].withValues(alpha: 0.15),
-                currentLevel['color'].withValues(alpha: 0.05),
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(
-              color: currentLevel['color'].withValues(alpha: 0.4),
-              width: 2,
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: currentLevel['color'].withValues(alpha: 0.2),
-                blurRadius: 12,
-                spreadRadius: 1,
-                offset: const Offset(0, 4),
-              ),
-            ],
-          ),
-          child: Column(
-            children: [
-              // Enhanced level header
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                decoration: BoxDecoration(
-                  color: currentLevel['color'].withValues(alpha: 0.2),
-                  borderRadius: BorderRadius.circular(25),
-                  border: Border.all(
-                    color: currentLevel['color'].withValues(alpha: 0.5),
-                  ),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      currentLevel['icon'],
-                      size: 24,
-                      color: currentLevel['color'],
-                    ),
-                    const SizedBox(width: 12),
-                    Text(
-                      currentLevel['title'],
-                      style: theme.textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: currentLevel['color'],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              
-              const SizedBox(height: 20),
-              
-              // Current level description
-              Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: theme.colorScheme.surface.withValues(alpha: 0.8),
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(
-                    color: theme.colorScheme.outline.withValues(alpha: 0.3),
-                  ),
-                ),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Icon(
-                          currentDescription['icon'],
-                          size: 20,
-                          color: currentLevel['color'],
-                        ),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                currentDescription['text'],
-                                style: theme.textTheme.bodyMedium?.copyWith(
-                                  color: theme.colorScheme.onSurface,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              const SizedBox(height: 2),
-                              Text(
-                                currentDescription['detail'],
-                                style: theme.textTheme.bodySmall?.copyWith(
-                                  color: theme.colorScheme.onSurfaceVariant,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    
-                    if (currentDescription['guidance'] != null) ...[
-                      const SizedBox(height: 12),
-                      Container(
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: currentLevel['color'].withValues(alpha: 0.1),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Icon(
-                              Icons.lightbulb_outline,
-                              size: 16,
-                              color: currentLevel['color'],
-                            ),
-                            const SizedBox(width: 8),
-                            Expanded(
-                              child: Text(
-                                currentDescription['guidance'],
-                                style: theme.textTheme.bodySmall?.copyWith(
-                                  color: theme.colorScheme.onSurface,
-                                  fontStyle: FontStyle.italic,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ],
-                ),
-              ),
-              
-              const SizedBox(height: 16),
-              
-              // Enhanced details grid
-              if (currentDescription['examples'] != null || 
-                  currentDescription['heartRate'] != null ||
-                  currentDescription['intensity'] != null) ...[
-                Row(
-                  children: [
-                    if (currentDescription['examples'] != null)
-                      Expanded(
-                        child: _buildDetailCard(
-                          theme,
-                          'Examples',
-                          Icons.fitness_center,
-                          (currentDescription['examples'] as List<String>).join(', '),
-                          currentLevel['color'],
-                        ),
-                      ),
-                    if (currentDescription['examples'] != null && 
-                        (currentDescription['heartRate'] != null || currentDescription['intensity'] != null))
-                      const SizedBox(width: 12),
-                    if (currentDescription['heartRate'] != null)
-                      Expanded(
-                        child: _buildDetailCard(
-                          theme,
-                          'Target HR',
-                          Icons.favorite,
-                          currentDescription['heartRate'],
-                          Colors.red,
-                        ),
-                      )
-                    else if (currentDescription['intensity'] != null)
-                      Expanded(
-                        child: _buildDetailCard(
-                          theme,
-                          'Intensity',
-                          Icons.trending_up,
-                          currentDescription['intensity'],
-                          Colors.orange,
-                        ),
-                      ),
-                  ],
-                ),
-                
-                if (currentDescription['duration'] != null || currentDescription['focus'] != null) ...[
-                  const SizedBox(height: 12),
-                  Row(
-                    children: [
-                      if (currentDescription['duration'] != null)
-                        Expanded(
-                          child: _buildDetailCard(
-                            theme,
-                            'Duration',
-                            Icons.timer,
-                            currentDescription['duration'],
-                            Colors.blue,
-                          ),
-                        ),
-                      if (currentDescription['duration'] != null && currentDescription['focus'] != null)
-                        const SizedBox(width: 12),
-                      if (currentDescription['focus'] != null)
-                        Expanded(
-                          child: _buildDetailCard(
-                            theme,
-                            'Focus',
-                            Icons.center_focus_strong,
-                            currentDescription['focus'],
-                            Colors.purple,
-                          ),
-                        ),
-                    ],
-                  ),
-                ],
-              ],
-            ],
-          ),
-        ),
-        
-        const SizedBox(height: 20),
-        
-        // Enhanced slider
+        // Simple slider
         SliderTheme(
           data: SliderTheme.of(context).copyWith(
-            trackHeight: 12,
-            thumbShape: RoundSliderThumbShape(
-              enabledThumbRadius: 16,
-              elevation: 4,
-            ),
-            overlayShape: const RoundSliderOverlayShape(overlayRadius: 24),
-            activeTrackColor: currentLevel['color'],
-            thumbColor: currentLevel['color'],
-            overlayColor: currentLevel['color'].withValues(alpha: 0.2),
+            trackHeight: 6,
+            thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 12),
+            activeTrackColor: theme.colorScheme.primary,
+            thumbColor: theme.colorScheme.primary,
+            overlayColor: theme.colorScheme.primary.withOpacity(0.2),
           ),
           child: Slider(
             value: value,
             min: 1,
             max: 5,
             divisions: 4,
-            onChanged: (newValue) {
-              _levelAnimationController.forward().then((_) {
-                _levelAnimationController.reset();
-              });
-              onChanged(newValue);
-            },
-            inactiveColor: theme.colorScheme.surfaceContainerHighest,
+            onChanged: onChanged,
+            inactiveColor: theme.colorScheme.outline.withOpacity(0.3),
           ),
         ),
         
-        // Enhanced level labels
+        // Simple level labels
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: _levelDescriptions.asMap().entries.map((entry) {
-              final index = entry.key;
-              final level = entry.value;
-              final isActive = index == currentIndex;
-              
-              return Column(
-                children: [
-                  AnimatedContainer(
-                    duration: const Duration(milliseconds: 200),
-                    padding: const EdgeInsets.all(4),
-                    decoration: BoxDecoration(
-                      color: isActive 
-                          ? level['color'].withValues(alpha: 0.2)
-                          : Colors.transparent,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Icon(
-                      level['icon'],
-                      size: 16,
-                      color: isActive
-                          ? level['color']
-                          : theme.colorScheme.onSurfaceVariant,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    level['title'],
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      color: isActive
-                          ? level['color']
-                          : theme.colorScheme.onSurfaceVariant,
-                      fontWeight: isActive ? FontWeight.w600 : FontWeight.normal,
-                    ),
-                  ),
-                ],
+            children: _levelDescriptions.map((level) {
+              return Text(
+                level['title'],
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                ),
               );
             }).toList(),
           ),
@@ -633,217 +378,4 @@ class _FitnessLevelScreenState extends ConsumerState<FitnessLevelScreen>
     );
   }
 
-  Widget _buildEnhancedFitnessSummary(ThemeData theme) {
-    final experienceLevel = _getFitnessExperience();
-    final levelIndex = experienceLevel == 'beginner' ? 0 :
-                      experienceLevel == 'novice' ? 1 :
-                      experienceLevel == 'intermediate' ? 2 :
-                      experienceLevel == 'advanced' ? 3 : 4;
-    final currentLevel = _levelDescriptions[levelIndex];
-    
-    return AnimatedBuilder(
-      animation: _summaryAnimationController,
-      builder: (context, child) {
-        return Transform.scale(
-          scale: 1.0 + (_summaryAnimationController.value * 0.05),
-          child: Container(
-            padding: const EdgeInsets.all(24),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  currentLevel['color'].withValues(alpha: 0.2),
-                  theme.colorScheme.primaryContainer.withValues(alpha: 0.3),
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(
-                color: currentLevel['color'].withValues(alpha: 0.4),
-                width: 2,
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: currentLevel['color'].withValues(alpha: 0.2),
-                  blurRadius: 12,
-                  spreadRadius: 2,
-                  offset: const Offset(0, 4),
-                ),
-              ],
-            ),
-            child: Column(
-              children: [
-                // Header
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.assessment,
-                      size: 28,
-                      color: currentLevel['color'],
-                    ),
-                    const SizedBox(width: 12),
-                    Text(
-                      'Overall Fitness Level',
-                      style: theme.textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: theme.colorScheme.onSurface,
-                      ),
-                    ),
-                  ],
-                ),
-                
-                const SizedBox(height: 16),
-                
-                // Level display
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                  decoration: BoxDecoration(
-                    color: currentLevel['color'].withValues(alpha: 0.2),
-                    borderRadius: BorderRadius.circular(25),
-                    border: Border.all(
-                      color: currentLevel['color'].withValues(alpha: 0.5),
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        currentLevel['icon'],
-                        size: 24,
-                        color: currentLevel['color'],
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        currentLevel['title'],
-                        style: theme.textTheme.headlineSmall?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: currentLevel['color'],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                
-                const SizedBox(height: 16),
-                
-                // Level breakdown
-                Row(
-                  children: [
-                    Expanded(
-                      child: _buildLevelBreakdown(
-                        'Cardio',
-                        Icons.directions_run,
-                        _cardioLevel,
-                        theme,
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: _buildLevelBreakdown(
-                        'Strength',
-                        Icons.fitness_center,
-                        _weightliftingLevel,
-                        theme,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _buildDetailCard(
-    ThemeData theme,
-    String title,
-    IconData icon,
-    String value,
-    Color color,
-  ) {
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: color.withValues(alpha: 0.3),
-        ),
-      ),
-      child: Column(
-        children: [
-          Icon(
-            icon,
-            size: 16,
-            color: color,
-          ),
-          const SizedBox(height: 4),
-          Text(
-            title,
-            style: theme.textTheme.bodySmall?.copyWith(
-              fontWeight: FontWeight.w600,
-              color: theme.colorScheme.onSurfaceVariant,
-              fontSize: 10,
-            ),
-          ),
-          const SizedBox(height: 2),
-          Text(
-            value,
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: color,
-              fontWeight: FontWeight.w500,
-              fontSize: 11,
-            ),
-            textAlign: TextAlign.center,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildLevelBreakdown(String title, IconData icon, double level, ThemeData theme) {
-    final levelIndex = (level - 1).round();
-    final levelData = _levelDescriptions[levelIndex];
-    
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surface.withValues(alpha: 0.8),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: levelData['color'].withValues(alpha: 0.3),
-        ),
-      ),
-      child: Column(
-        children: [
-          Icon(
-            icon,
-            size: 20,
-            color: levelData['color'],
-          ),
-          const SizedBox(height: 4),
-          Text(
-            title,
-            style: theme.textTheme.bodySmall?.copyWith(
-              fontWeight: FontWeight.w600,
-              color: theme.colorScheme.onSurface,
-            ),
-          ),
-          const SizedBox(height: 2),
-          Text(
-            levelData['title'],
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: levelData['color'],
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }

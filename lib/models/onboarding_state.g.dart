@@ -62,7 +62,7 @@ class OnboardingStateAdapter extends TypeAdapter<OnboardingState> {
 OnboardingState _$OnboardingStateFromJson(Map<String, dynamic> json) =>
     OnboardingState(
       currentStep: (json['currentStep'] as num?)?.toInt() ?? 0,
-      totalSteps: (json['totalSteps'] as num?)?.toInt() ?? 5,
+      totalSteps: (json['totalSteps'] as num?)?.toInt() ?? 6,
       isCompleted: json['isCompleted'] as bool? ?? false,
       stepData: json['stepData'] as Map<String, dynamic>? ?? const {},
       lastUpdated: json['lastUpdated'] == null

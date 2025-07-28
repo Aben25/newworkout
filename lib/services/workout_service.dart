@@ -173,11 +173,11 @@ class WorkoutService {
         throw Exception('User not authenticated');
       }
 
-      // Create workout
+      // Create workout (excluding description field as it doesn't exist in DB)
       final workoutData = {
         'user_id': userId,
         'name': name,
-        'description': description,
+        // 'description': description, // Column doesn't exist in Supabase table
         'is_active': false,
         'is_completed': false,
         'created_at': DateTime.now().toIso8601String(),

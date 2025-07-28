@@ -88,13 +88,13 @@ class _WorkoutRatingTrendsChartState extends ConsumerState<WorkoutRatingTrendsCh
           verticalInterval: 2,
           getDrawingHorizontalLine: (value) {
             return FlLine(
-              color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+              color: Theme.of(context).colorScheme.outline.withOpacity( 0.2),
               strokeWidth: 1,
             );
           },
           getDrawingVerticalLine: (value) {
             return FlLine(
-              color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+              color: Theme.of(context).colorScheme.outline.withOpacity( 0.2),
               strokeWidth: 1,
             );
           },
@@ -139,7 +139,7 @@ class _WorkoutRatingTrendsChartState extends ConsumerState<WorkoutRatingTrendsCh
         borderData: FlBorderData(
           show: true,
           border: Border.all(
-            color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
+            color: Theme.of(context).colorScheme.outline.withOpacity( 0.3),
           ),
         ),
         minX: 0,
@@ -173,8 +173,8 @@ class _WorkoutRatingTrendsChartState extends ConsumerState<WorkoutRatingTrendsCh
               show: true,
               gradient: LinearGradient(
                 colors: [
-                  Colors.amber.withValues(alpha: 0.3),
-                  Colors.amber.withValues(alpha: 0.1),
+                  Colors.amber.withOpacity( 0.3),
+                  Colors.amber.withOpacity( 0.1),
                 ],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,

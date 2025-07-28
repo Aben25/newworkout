@@ -103,10 +103,10 @@ class _EnhancedSetLoggerWidgetState extends ConsumerState<EnhancedSetLoggerWidge
       _weightController.text = lastSet.weight.toString();
     } else {
       // Load from workout exercise configuration
-      if (widget.workoutExercise.reps?.isNotEmpty == true) {
+      if (widget.workoutExercise.reps != null && widget.workoutExercise.reps!.isNotEmpty) {
         _repsController.text = widget.workoutExercise.reps!.first.toString();
       }
-      if (widget.workoutExercise.weight?.isNotEmpty == true) {
+      if (widget.workoutExercise.weight != null && widget.workoutExercise.weight!.isNotEmpty) {
         _weightController.text = widget.workoutExercise.weight!.first.toString();
       }
     }
@@ -280,7 +280,7 @@ class _EnhancedSetLoggerWidgetState extends ConsumerState<EnhancedSetLoggerWidge
               Text(
                 widget.exercise.name,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+                  color: Theme.of(context).colorScheme.onSurface.withOpacity( 0.7),
                 ),
               ),
               // Progress indicator
@@ -564,7 +564,7 @@ class _EnhancedSetLoggerWidgetState extends ConsumerState<EnhancedSetLoggerWidge
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   decoration: BoxDecoration(
                     color: isSelected
-                        ? difficulty.color.withValues(alpha: 0.2)
+                        ? difficulty.color.withOpacity( 0.2)
                         : Theme.of(context).colorScheme.surfaceContainerHighest,
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(
@@ -733,7 +733,7 @@ class _EnhancedSetLoggerWidgetState extends ConsumerState<EnhancedSetLoggerWidge
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   color: isPersonalRecord
-                      ? AppTheme.successColor.withValues(alpha: 0.1)
+                      ? AppTheme.successColor.withOpacity( 0.1)
                       : Theme.of(context).colorScheme.surfaceContainerHighest,
                   borderRadius: BorderRadius.circular(8),
                   border: isPersonalRecord
@@ -792,7 +792,7 @@ class _EnhancedSetLoggerWidgetState extends ConsumerState<EnhancedSetLoggerWidge
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: _getProgressionColor(suggestion.progressionType).withValues(alpha: 0.1),
+        color: _getProgressionColor(suggestion.progressionType).withOpacity( 0.1),
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
           color: _getProgressionColor(suggestion.progressionType),
@@ -838,7 +838,7 @@ class _EnhancedSetLoggerWidgetState extends ConsumerState<EnhancedSetLoggerWidge
                 Text(
                   '(${(suggestion.confidence * 100).round()}% confidence)',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+                    color: Theme.of(context).colorScheme.onSurface.withOpacity( 0.7),
                   ),
                 ),
               ],

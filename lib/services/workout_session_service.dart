@@ -406,8 +406,10 @@ class WorkoutSessionService {
     try {
       if (completedSets.isEmpty) return;
 
-      final completedSetsData = completedSets.map((setLog) => {
-        'workout_id': setLog.workoutExerciseId.split('_')[0], // Extract workout ID
+      final completedSetsData = completedSets.map((setLog) {
+        final parts = setLog.workoutExerciseId.split('_');
+        return {
+        'workout_id': parts.isNotEmpty ? parts[0] : setLog.workoutExerciseId, // Extract workout ID safely
         'workout_exercise_id': setLog.workoutExerciseId,
         'performed_set_order': setLog.setNumber,
         'performed_reps': setLog.reps,
@@ -415,6 +417,7 @@ class WorkoutSessionService {
         'set_feedback_difficulty': setLog.difficultyRating,
         'created_at': setLog.timestamp.toIso8601String(),
         'updated_at': setLog.timestamp.toIso8601String(),
+      };
       }).toList();
 
       await _supabaseService.client

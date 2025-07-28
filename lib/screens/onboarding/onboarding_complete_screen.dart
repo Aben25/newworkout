@@ -86,6 +86,27 @@ class _OnboardingCompleteScreenState extends ConsumerState<OnboardingCompleteScr
     });
   }
 
+  String _getGoalDisplayName(String goalId) {
+    switch (goalId) {
+      case 'training_sport':
+        return 'Training for a specific sport';
+      case 'increase_strength':
+        return 'Increase strength';
+      case 'increase_stamina':
+        return 'Increase stamina';
+      case 'optimize_health':
+        return 'Optimize Health and Fitness';
+      case 'build_muscle':
+        return 'Build muscle mass and size';
+      case 'weight_loss':
+        return 'Weight loss';
+      default:
+        return goalId.replaceAll('_', ' ').split(' ')
+            .map((word) => word[0].toUpperCase() + word.substring(1))
+            .join(' ');
+    }
+  }
+
   Future<void> _completeOnboarding() async {
     if (_isCompleting) return;
     
@@ -176,7 +197,7 @@ class _OnboardingCompleteScreenState extends ConsumerState<OnboardingCompleteScr
                                         shape: BoxShape.circle,
                                         boxShadow: [
                                           BoxShadow(
-                                            color: theme.colorScheme.primary.withValues(alpha: 0.3),
+                                            color: theme.colorScheme.primary.withOpacity( 0.3),
                                             blurRadius: 20,
                                             spreadRadius: 5,
                                           ),
@@ -199,19 +220,9 @@ class _OnboardingCompleteScreenState extends ConsumerState<OnboardingCompleteScr
                         
                         // Completion Title
                         Text(
-                          'Congratulations!',
-                          style: theme.textTheme.headlineLarge?.copyWith(
+                          'Your Fitness Plan is Ready',
+                          style: theme.textTheme.headlineMedium?.copyWith(
                             fontWeight: FontWeight.bold,
-                            color: theme.colorScheme.primary,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        
-                        const SizedBox(height: 16),
-                        
-                        Text(
-                          'Your profile is complete',
-                          style: theme.textTheme.headlineSmall?.copyWith(
                             color: theme.colorScheme.onSurface,
                           ),
                           textAlign: TextAlign.center,
@@ -219,24 +230,65 @@ class _OnboardingCompleteScreenState extends ConsumerState<OnboardingCompleteScr
                         
                         const SizedBox(height: 24),
                         
-                        // Personalized Message
-                        Container(
-                          padding: const EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                            color: theme.colorScheme.primaryContainer.withValues(alpha: 0.5),
-                            borderRadius: BorderRadius.circular(16),
-                            border: Border.all(
-                              color: theme.colorScheme.primary.withValues(alpha: 0.3),
-                            ),
-                          ),
-                          child: Text(
-                            _completionMessage,
-                            style: theme.textTheme.bodyLarge?.copyWith(
-                              color: theme.colorScheme.onSurface,
-                              height: 1.5,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
+                        // Selected Goals Summary
+                        Consumer(
+                          builder: (context, ref, child) {
+                            final onboardingState = ref.watch(onboardingProvider);
+                            final goals = onboardingState.stepData['fitnessGoals'] as List<String>? ?? [];
+                            
+                            return Container(
+                              padding: const EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                color: theme.colorScheme.surfaceVariant.withOpacity(0.5),
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: Column(
+                                children: [
+                                  // Goal checkmarks
+                                  if (goals.isNotEmpty) ...[
+                                    ...goals.take(3).map((goal) => Padding(
+                                      padding: const EdgeInsets.symmetric(vertical: 4),
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            width: 20,
+                                            height: 20,
+                                            decoration: BoxDecoration(
+                                              color: theme.colorScheme.primary,
+                                              shape: BoxShape.circle,
+                                            ),
+                                            child: Icon(
+                                              Icons.check,
+                                              color: theme.colorScheme.onPrimary,
+                                              size: 14,
+                                            ),
+                                          ),
+                                          const SizedBox(width: 12),
+                                          Text(
+                                            _getGoalDisplayName(goal),
+                                            style: theme.textTheme.bodyMedium?.copyWith(
+                                              color: theme.colorScheme.onSurface,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )),
+                                  ],
+                                  
+                                  const SizedBox(height: 16),
+                                  
+                                  Text(
+                                    'The more you share, the better we can tailor your fitness plan. Your information is kept private and secure.',
+                                    style: theme.textTheme.bodySmall?.copyWith(
+                                      color: theme.colorScheme.onSurfaceVariant,
+                                      height: 1.4,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
                         ),
                       ],
                     ),
@@ -282,22 +334,12 @@ class _OnboardingCompleteScreenState extends ConsumerState<OnboardingCompleteScr
                                   ),
                                 ],
                               )
-                            : Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Text(
-                                    'Start Your Fitness Journey',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                  const SizedBox(width: 8),
-                                  Icon(
-                                    Icons.arrow_forward,
-                                    size: 20,
-                                    color: theme.colorScheme.onPrimary,
-                                  ),
-                                ],
+                            : const Text(
+                                'View My Plan',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16,
+                                ),
                               ),
                       ),
                     ),
@@ -314,6 +356,9 @@ class _OnboardingCompleteScreenState extends ConsumerState<OnboardingCompleteScr
                         ),
                       ),
                     ),
+                    
+                    // Extra bottom padding to prevent overflow
+                    const SizedBox(height: 20),
                   ],
                 ),
               ],

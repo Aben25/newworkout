@@ -286,7 +286,12 @@ class WorkoutSessionActive extends WorkoutSessionState {
   });
 
   /// Get current workout exercise
-  WorkoutExercise get currentWorkoutExercise => workoutExercises[currentExerciseIndex];
+  WorkoutExercise get currentWorkoutExercise {
+    if (workoutExercises.isEmpty || currentExerciseIndex >= workoutExercises.length) {
+      throw StateError('No exercises available or invalid exercise index');
+    }
+    return workoutExercises[currentExerciseIndex];
+  }
   
   /// Get current exercise details
   Exercise? get currentExercise => exercises

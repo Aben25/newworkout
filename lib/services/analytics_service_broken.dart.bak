@@ -1934,16 +1934,3 @@ class VolumeDataPoint {
     }
   }
 }
-
-/// Helper class for volume data points
-class VolumeDataPoint {
-  final DateTime date;
-  final double volume;
-  final String exerciseId;
-
-  VolumeDataPoint({
-    required this.date,
-    required this.volume,
-    required this.exerciseId,
-  });
-}}

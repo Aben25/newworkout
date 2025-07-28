@@ -517,13 +517,8 @@ class _WorkoutDetailScreenState extends ConsumerState<WorkoutDetailScreen> {
       await workoutNotifier.startWorkout(widget.workoutId);
 
       if (mounted) {
-        // TODO: Navigate to workout session screen
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Workout started!'),
-            backgroundColor: Colors.green,
-          ),
-        );
+        // Navigate to workout session screen
+        context.push('/workout-session/${widget.workoutId}');
       }
     } catch (e) {
       if (mounted) {

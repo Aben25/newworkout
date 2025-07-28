@@ -136,13 +136,13 @@ class _ProgressChartsWidgetState extends ConsumerState<ProgressChartsWidget>
           verticalInterval: 1,
           getDrawingHorizontalLine: (value) {
             return FlLine(
-              color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+              color: Theme.of(context).colorScheme.outline.withOpacity( 0.2),
               strokeWidth: 1,
             );
           },
           getDrawingVerticalLine: (value) {
             return FlLine(
-              color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+              color: Theme.of(context).colorScheme.outline.withOpacity( 0.2),
               strokeWidth: 1,
             );
           },
@@ -194,7 +194,7 @@ class _ProgressChartsWidgetState extends ConsumerState<ProgressChartsWidget>
         borderData: FlBorderData(
           show: true,
           border: Border.all(
-            color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
+            color: Theme.of(context).colorScheme.outline.withOpacity( 0.3),
           ),
         ),
         minX: 0,
@@ -230,8 +230,8 @@ class _ProgressChartsWidgetState extends ConsumerState<ProgressChartsWidget>
               show: true,
               gradient: LinearGradient(
                 colors: [
-                  Theme.of(context).colorScheme.primary.withValues(alpha: 0.3),
-                  Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
+                  Theme.of(context).colorScheme.primary.withOpacity( 0.3),
+                  Theme.of(context).colorScheme.primary.withOpacity( 0.1),
                 ],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
@@ -286,13 +286,13 @@ class _ProgressChartsWidgetState extends ConsumerState<ProgressChartsWidget>
           verticalInterval: 1,
           getDrawingHorizontalLine: (value) {
             return FlLine(
-              color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+              color: Theme.of(context).colorScheme.outline.withOpacity( 0.2),
               strokeWidth: 1,
             );
           },
           getDrawingVerticalLine: (value) {
             return FlLine(
-              color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+              color: Theme.of(context).colorScheme.outline.withOpacity( 0.2),
               strokeWidth: 1,
             );
           },
@@ -341,7 +341,7 @@ class _ProgressChartsWidgetState extends ConsumerState<ProgressChartsWidget>
         borderData: FlBorderData(
           show: true,
           border: Border.all(
-            color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
+            color: Theme.of(context).colorScheme.outline.withOpacity( 0.3),
           ),
         ),
         lineBarsData: [
@@ -484,7 +484,7 @@ class _ProgressChartsWidgetState extends ConsumerState<ProgressChartsWidget>
         borderData: FlBorderData(
           show: true,
           border: Border.all(
-            color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
+            color: Theme.of(context).colorScheme.outline.withOpacity( 0.3),
           ),
         ),
         barGroups: barGroups,
@@ -496,7 +496,7 @@ class _ProgressChartsWidgetState extends ConsumerState<ProgressChartsWidget>
               : 20,
           getDrawingHorizontalLine: (value) {
             return FlLine(
-              color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+              color: Theme.of(context).colorScheme.outline.withOpacity( 0.2),
               strokeWidth: 1,
             );
           },

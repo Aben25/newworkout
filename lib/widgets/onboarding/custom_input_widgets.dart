@@ -60,7 +60,7 @@ class _EnhancedNameInputWidgetState extends State<EnhancedNameInputWidget> {
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16),
               borderSide: BorderSide(
-                color: theme.colorScheme.outline.withValues(alpha: 0.5),
+                color: theme.colorScheme.outline.withOpacity( 0.5),
               ),
             ),
             focusedBorder: OutlineInputBorder(
@@ -78,7 +78,7 @@ class _EnhancedNameInputWidgetState extends State<EnhancedNameInputWidget> {
               ),
             ),
             filled: true,
-            fillColor: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+            fillColor: theme.colorScheme.surfaceContainerHighest.withOpacity( 0.3),
           ),
           validator: (value) {
             final error = widget.validator?.call(value) ?? _validateName(value);
@@ -165,7 +165,7 @@ class _EnhancedAgeInputWidgetState extends State<EnhancedAgeInputWidget> {
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16),
               borderSide: BorderSide(
-                color: theme.colorScheme.outline.withValues(alpha: 0.5),
+                color: theme.colorScheme.outline.withOpacity( 0.5),
               ),
             ),
             focusedBorder: OutlineInputBorder(
@@ -183,7 +183,7 @@ class _EnhancedAgeInputWidgetState extends State<EnhancedAgeInputWidget> {
               ),
             ),
             filled: true,
-            fillColor: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+            fillColor: theme.colorScheme.surfaceContainerHighest.withOpacity( 0.3),
           ),
           validator: (value) {
             final error = widget.validator?.call(value) ?? _validateAge(value);
@@ -263,7 +263,7 @@ class _EnhancedGenderSelectionWidgetState extends State<EnhancedGenderSelectionW
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16),
               borderSide: BorderSide(
-                color: theme.colorScheme.outline.withValues(alpha: 0.5),
+                color: theme.colorScheme.outline.withOpacity( 0.5),
               ),
             ),
             focusedBorder: OutlineInputBorder(
@@ -281,7 +281,7 @@ class _EnhancedGenderSelectionWidgetState extends State<EnhancedGenderSelectionW
               ),
             ),
             filled: true,
-            fillColor: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+            fillColor: theme.colorScheme.surfaceContainerHighest.withOpacity( 0.3),
           ),
           items: const [
             DropdownMenuItem(value: 'male', child: Text('Male')),
@@ -402,7 +402,7 @@ class _EnhancedHeightInputWidgetState extends State<EnhancedHeightInputWidget> {
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(16),
                     borderSide: BorderSide(
-                      color: theme.colorScheme.outline.withValues(alpha: 0.5),
+                      color: theme.colorScheme.outline.withOpacity( 0.5),
                     ),
                   ),
                   focusedBorder: OutlineInputBorder(
@@ -420,7 +420,7 @@ class _EnhancedHeightInputWidgetState extends State<EnhancedHeightInputWidget> {
                     ),
                   ),
                   filled: true,
-                  fillColor: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+                  fillColor: theme.colorScheme.surfaceContainerHighest.withOpacity( 0.3),
                   helperText: widget.unit == 'ft' ? 'Enter as decimal (e.g., 5.7)' : null,
                 ),
                 validator: (value) {
@@ -443,9 +443,9 @@ class _EnhancedHeightInputWidgetState extends State<EnhancedHeightInputWidget> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(
-                    color: theme.colorScheme.outline.withValues(alpha: 0.5),
+                    color: theme.colorScheme.outline.withOpacity( 0.5),
                   ),
-                  color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+                  color: theme.colorScheme.surfaceContainerHighest.withOpacity( 0.3),
                 ),
                 child: DropdownButtonFormField<String>(
                   value: _getValidHeightUnit(widget.unit),
@@ -562,7 +562,7 @@ class _EnhancedWeightInputWidgetState extends State<EnhancedWeightInputWidget> {
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(16),
                     borderSide: BorderSide(
-                      color: theme.colorScheme.outline.withValues(alpha: 0.5),
+                      color: theme.colorScheme.outline.withOpacity( 0.5),
                     ),
                   ),
                   focusedBorder: OutlineInputBorder(
@@ -580,7 +580,7 @@ class _EnhancedWeightInputWidgetState extends State<EnhancedWeightInputWidget> {
                     ),
                   ),
                   filled: true,
-                  fillColor: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+                  fillColor: theme.colorScheme.surfaceContainerHighest.withOpacity( 0.3),
                 ),
                 validator: (value) {
                   final error = widget.validator?.call(value) ?? 
@@ -602,9 +602,9 @@ class _EnhancedWeightInputWidgetState extends State<EnhancedWeightInputWidget> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(
-                    color: theme.colorScheme.outline.withValues(alpha: 0.5),
+                    color: theme.colorScheme.outline.withOpacity( 0.5),
                   ),
-                  color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+                  color: theme.colorScheme.surfaceContainerHighest.withOpacity( 0.3),
                 ),
                 child: DropdownButtonFormField<String>(
                   value: _getValidWeightUnit(widget.unit),

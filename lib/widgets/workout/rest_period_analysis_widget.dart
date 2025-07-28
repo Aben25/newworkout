@@ -228,7 +228,7 @@ class _RestPeriodAnalysisWidgetState extends State<RestPeriodAnalysisWidget>
               Text(
                 'Optimize your recovery time',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+                  color: Theme.of(context).colorScheme.onSurface.withOpacity( 0.7),
                 ),
               ),
             ],
@@ -410,7 +410,7 @@ class _RestPeriodAnalysisWidgetState extends State<RestPeriodAnalysisWidget>
             ),
             belowBarData: BarAreaData(
               show: true,
-              color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
+              color: Theme.of(context).colorScheme.primary.withOpacity( 0.1),
             ),
           ),
         ],
@@ -442,10 +442,10 @@ class _RestPeriodAnalysisWidgetState extends State<RestPeriodAnalysisWidget>
           child: Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primaryContainer.withValues(alpha: 0.3),
+              color: Theme.of(context).colorScheme.primaryContainer.withOpacity( 0.3),
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
-                color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.3),
+                color: Theme.of(context).colorScheme.primary.withOpacity( 0.3),
               ),
             ),
             child: Column(
@@ -524,9 +524,9 @@ class _RestPeriodAnalysisWidgetState extends State<RestPeriodAnalysisWidget>
               label: Text(_formatTime(time)),
               onPressed: () => widget.onRestTimeSelected?.call(time),
               backgroundColor: isOptimal
-                  ? Colors.green.withValues(alpha: 0.2)
+                  ? Colors.green.withOpacity( 0.2)
                   : isAverage
-                      ? Colors.orange.withValues(alpha: 0.2)
+                      ? Colors.orange.withOpacity( 0.2)
                       : null,
               side: BorderSide(
                 color: isOptimal

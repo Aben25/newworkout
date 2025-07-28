@@ -66,7 +66,7 @@ class _ExerciseSelectorSheetState extends ConsumerState<ExerciseSelectorSheet>
             height: 4,
             margin: const EdgeInsets.symmetric(vertical: 12),
             decoration: BoxDecoration(
-              color: theme.colorScheme.onSurfaceVariant.withValues(alpha: 0.4),
+              color: theme.colorScheme.onSurfaceVariant.withOpacity( 0.4),
               borderRadius: BorderRadius.circular(2),
             ),
           ),
@@ -119,7 +119,7 @@ class _ExerciseSelectorSheetState extends ConsumerState<ExerciseSelectorSheet>
                   borderSide: BorderSide.none,
                 ),
                 filled: true,
-                fillColor: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+                fillColor: theme.colorScheme.surfaceContainerHighest.withOpacity( 0.3),
               ),
             ),
           ),
@@ -157,7 +157,7 @@ class _ExerciseSelectorSheetState extends ConsumerState<ExerciseSelectorSheet>
                 color: theme.colorScheme.surface,
                 border: Border(
                   top: BorderSide(
-                    color: theme.colorScheme.outline.withValues(alpha: 0.2),
+                    color: theme.colorScheme.outline.withOpacity( 0.2),
                   ),
                 ),
               ),
@@ -422,7 +422,7 @@ class _ExerciseSelectorSheetState extends ConsumerState<ExerciseSelectorSheet>
                 Container(
                   padding: const EdgeInsets.all(4),
                   decoration: BoxDecoration(
-                    color: theme.colorScheme.primary.withValues(alpha: 0.1),
+                    color: theme.colorScheme.primary.withOpacity( 0.1),
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: Icon(

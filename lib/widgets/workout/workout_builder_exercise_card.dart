@@ -160,7 +160,7 @@ class WorkoutBuilderExerciseCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+                  color: theme.colorScheme.surfaceContainerHighest.withOpacity( 0.3),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Row(
@@ -178,7 +178,7 @@ class WorkoutBuilderExerciseCard extends StatelessWidget {
                     Container(
                       width: 1,
                       height: 40,
-                      color: theme.colorScheme.outline.withValues(alpha: 0.2),
+                      color: theme.colorScheme.outline.withOpacity( 0.2),
                     ),
                     
                     // Weight
@@ -194,7 +194,7 @@ class WorkoutBuilderExerciseCard extends StatelessWidget {
                     Container(
                       width: 1,
                       height: 40,
-                      color: theme.colorScheme.outline.withValues(alpha: 0.2),
+                      color: theme.colorScheme.outline.withOpacity( 0.2),
                     ),
                     
                     // Rest time
@@ -217,10 +217,10 @@ class WorkoutBuilderExerciseCard extends StatelessWidget {
                   width: double.infinity,
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.2),
+                    color: theme.colorScheme.surfaceContainerHighest.withOpacity( 0.2),
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
-                      color: theme.colorScheme.outline.withValues(alpha: 0.2),
+                      color: theme.colorScheme.outline.withOpacity( 0.2),
                     ),
                   ),
                   child: Row(

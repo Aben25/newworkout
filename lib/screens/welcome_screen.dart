@@ -20,7 +20,7 @@ class WelcomeScreen extends StatelessWidget {
                 width: 120,
                 height: 120,
                 decoration: BoxDecoration(
-                  color: theme.colorScheme.primary.withValues(alpha: 0.1),
+                  color: theme.colorScheme.primary.withOpacity( 0.1),
                   borderRadius: BorderRadius.circular(60),
                 ),
                 child: Icon(
@@ -46,7 +46,7 @@ class WelcomeScreen extends StatelessWidget {
               Text(
                 'Track your fitness journey, achieve your goals, and stay motivated with personalized workouts.',
                 style: theme.textTheme.bodyLarge?.copyWith(
-                  color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
+                  color: theme.colorScheme.onSurface.withOpacity( 0.7),
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -83,7 +83,7 @@ class WelcomeScreen extends StatelessWidget {
                 child: Text(
                   'Continue as Guest',
                   style: TextStyle(
-                    color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+                    color: theme.colorScheme.onSurface.withOpacity( 0.6),
                   ),
                 ),
               ),

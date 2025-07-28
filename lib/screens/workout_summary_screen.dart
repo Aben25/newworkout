@@ -194,7 +194,7 @@ class _WorkoutSummaryScreenState extends ConsumerState<WorkoutSummaryScreen>
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
-                            color: AppTheme.successColor.withValues(alpha: 0.3),
+                            color: AppTheme.successColor.withOpacity( 0.3),
                             blurRadius: 20,
                             spreadRadius: 5,
                           ),
@@ -250,7 +250,7 @@ class _WorkoutSummaryScreenState extends ConsumerState<WorkoutSummaryScreen>
                 Text(
                   session.workout.name ?? 'Great workout',
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.8),
+                    color: Theme.of(context).colorScheme.onSurface.withOpacity( 0.8),
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -445,9 +445,9 @@ class _WorkoutSummaryScreenState extends ConsumerState<WorkoutSummaryScreen>
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.1),
+        color: color.withOpacity( 0.1),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: color.withValues(alpha: 0.3)),
+        border: Border.all(color: color.withOpacity( 0.3)),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -583,7 +583,7 @@ class _WorkoutSummaryScreenState extends ConsumerState<WorkoutSummaryScreen>
                     Text(
                       '${exerciseLog.completedSets} sets • ${exerciseLog.totalReps} reps • ${exerciseLog.totalVolume.toStringAsFixed(0)}kg',
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+                        color: Theme.of(context).colorScheme.onSurface.withOpacity( 0.7),
                       ),
                     ),
                   ],
@@ -623,10 +623,10 @@ class _WorkoutSummaryScreenState extends ConsumerState<WorkoutSummaryScreen>
                 return Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
+                    color: Theme.of(context).colorScheme.primary.withOpacity( 0.1),
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
-                      color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.3),
+                      color: Theme.of(context).colorScheme.primary.withOpacity( 0.3),
                     ),
                   ),
                   child: Text(
@@ -936,7 +936,7 @@ class _WorkoutSummaryScreenState extends ConsumerState<WorkoutSummaryScreen>
                     Icon(
                       Icons.emoji_events,
                       size: 48,
-                      color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.5),
+                      color: Theme.of(context).colorScheme.primary.withOpacity( 0.5),
                     ),
                     const SizedBox(height: 16),
                     Text(
@@ -948,7 +948,7 @@ class _WorkoutSummaryScreenState extends ConsumerState<WorkoutSummaryScreen>
                     Text(
                       'Keep pushing yourself to unlock more achievements!',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+                        color: Theme.of(context).colorScheme.onSurface.withOpacity( 0.7),
                       ),
                       textAlign: TextAlign.center,
                     ),

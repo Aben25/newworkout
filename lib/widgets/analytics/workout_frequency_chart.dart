@@ -192,7 +192,7 @@ class _WorkoutFrequencyChartState extends ConsumerState<WorkoutFrequencyChart>
         borderData: FlBorderData(
           show: true,
           border: Border.all(
-            color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
+            color: Theme.of(context).colorScheme.outline.withOpacity( 0.3),
           ),
         ),
         barGroups: barGroups,
@@ -202,7 +202,7 @@ class _WorkoutFrequencyChartState extends ConsumerState<WorkoutFrequencyChart>
           horizontalInterval: 1,
           getDrawingHorizontalLine: (value) {
             return FlLine(
-              color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+              color: Theme.of(context).colorScheme.outline.withOpacity( 0.2),
               strokeWidth: 1,
             );
           },
@@ -231,13 +231,13 @@ class _WorkoutFrequencyChartState extends ConsumerState<WorkoutFrequencyChart>
           verticalInterval: 1,
           getDrawingHorizontalLine: (value) {
             return FlLine(
-              color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+              color: Theme.of(context).colorScheme.outline.withOpacity( 0.2),
               strokeWidth: 1,
             );
           },
           getDrawingVerticalLine: (value) {
             return FlLine(
-              color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+              color: Theme.of(context).colorScheme.outline.withOpacity( 0.2),
               strokeWidth: 1,
             );
           },
@@ -286,7 +286,7 @@ class _WorkoutFrequencyChartState extends ConsumerState<WorkoutFrequencyChart>
         borderData: FlBorderData(
           show: true,
           border: Border.all(
-            color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
+            color: Theme.of(context).colorScheme.outline.withOpacity( 0.3),
           ),
         ),
         minX: 0,
@@ -322,8 +322,8 @@ class _WorkoutFrequencyChartState extends ConsumerState<WorkoutFrequencyChart>
               show: true,
               gradient: LinearGradient(
                 colors: [
-                  Theme.of(context).colorScheme.primary.withValues(alpha: 0.3),
-                  Theme.of(context).colorScheme.primary.withValues(alpha: 0.05),
+                  Theme.of(context).colorScheme.primary.withOpacity( 0.3),
+                  Theme.of(context).colorScheme.primary.withOpacity( 0.05),
                 ],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
@@ -453,8 +453,8 @@ class _WorkoutFrequencyChartState extends ConsumerState<WorkoutFrequencyChart>
 
   Color _getIntensityColor(int count) {
     if (count == 0) return Theme.of(context).colorScheme.surfaceContainerHighest;
-    if (count == 1) return Theme.of(context).colorScheme.primary.withValues(alpha: 0.3);
-    if (count == 2) return Theme.of(context).colorScheme.primary.withValues(alpha: 0.6);
+    if (count == 1) return Theme.of(context).colorScheme.primary.withOpacity( 0.3);
+    if (count == 2) return Theme.of(context).colorScheme.primary.withOpacity( 0.6);
     return Theme.of(context).colorScheme.primary;
   }
 

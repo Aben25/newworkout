@@ -475,7 +475,12 @@ class WorkoutSessionActive extends WorkoutSessionState {
     required this.startTime,
   });
 
-  WorkoutExercise get currentWorkoutExercise => workoutExercises[currentExerciseIndex];
+  WorkoutExercise get currentWorkoutExercise {
+    if (workoutExercises.isEmpty || currentExerciseIndex >= workoutExercises.length) {
+      throw StateError('No exercises available or invalid exercise index');
+    }
+    return workoutExercises[currentExerciseIndex];
+  }
   
   Exercise? get currentExercise => exercises
       .where((e) => e.id == currentWorkoutExercise.exerciseId)

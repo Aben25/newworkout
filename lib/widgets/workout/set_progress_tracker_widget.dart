@@ -145,7 +145,7 @@ class _SetProgressTrackerWidgetState extends State<SetProgressTrackerWidget>
               Text(
                 widget.exercise.name,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+                  color: Theme.of(context).colorScheme.onSurface.withOpacity( 0.7),
                 ),
               ),
             ],
@@ -259,7 +259,7 @@ class _SetProgressTrackerWidgetState extends State<SetProgressTrackerWidget>
         border: Border.all(
           color: isCompleted
               ? _getSetCompletionColor(completedSet, plannedReps, plannedWeight)
-              : Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
+              : Theme.of(context).colorScheme.outline.withOpacity( 0.3),
           width: isCompleted ? 2 : 1,
         ),
       ),
@@ -289,7 +289,7 @@ class _SetProgressTrackerWidgetState extends State<SetProgressTrackerWidget>
             Text(
               '${completedSet.weight}kg',
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: Colors.white.withValues(alpha: 0.9),
+                color: Colors.white.withOpacity( 0.9),
               ),
             ),
           ] else ...[
@@ -297,7 +297,7 @@ class _SetProgressTrackerWidgetState extends State<SetProgressTrackerWidget>
               Text(
                 '$plannedReps',
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
+                  color: Theme.of(context).colorScheme.onSurface.withOpacity( 0.6),
                 ),
               ),
             ],
@@ -305,7 +305,7 @@ class _SetProgressTrackerWidgetState extends State<SetProgressTrackerWidget>
               Text(
                 '${plannedWeight}kg',
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
+                  color: Theme.of(context).colorScheme.onSurface.withOpacity( 0.6),
                 ),
               ),
             ],
@@ -471,13 +471,13 @@ class _SetProgressTrackerWidgetState extends State<SetProgressTrackerWidget>
             Icon(
               Icons.bar_chart,
               size: 48,
-              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.3),
+              color: Theme.of(context).colorScheme.onSurface.withOpacity( 0.3),
             ),
             const SizedBox(height: 8),
             Text(
               'Complete sets to see progress',
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
+                color: Theme.of(context).colorScheme.onSurface.withOpacity( 0.6),
               ),
             ),
           ],
@@ -583,10 +583,10 @@ class _SetProgressTrackerWidgetState extends State<SetProgressTrackerWidget>
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primaryContainer.withValues(alpha: 0.3),
+        color: Theme.of(context).colorScheme.primaryContainer.withOpacity( 0.3),
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.3),
+          color: Theme.of(context).colorScheme.primary.withOpacity( 0.3),
         ),
       ),
       child: Column(

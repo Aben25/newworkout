@@ -143,7 +143,7 @@ class _WorkoutComparisonWidgetState extends ConsumerState<WorkoutComparisonWidge
               
               return Card(
                 color: isSelected 
-                    ? Theme.of(context).colorScheme.primaryContainer.withValues(alpha: 0.3)
+                    ? Theme.of(context).colorScheme.primaryContainer.withOpacity( 0.3)
                     : null,
                 child: ListTile(
                   leading: CircleAvatar(
@@ -221,7 +221,7 @@ class _WorkoutComparisonWidgetState extends ConsumerState<WorkoutComparisonWidge
         ),
         borderRadius: BorderRadius.circular(8),
         color: workout != null 
-            ? (number == 1 ? Colors.blue : Colors.green).withValues(alpha: 0.1)
+            ? (number == 1 ? Colors.blue : Colors.green).withOpacity( 0.1)
             : null,
       ),
       child: Column(
@@ -340,7 +340,7 @@ class _WorkoutComparisonWidgetState extends ConsumerState<WorkoutComparisonWidge
         Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.primaryContainer.withValues(alpha: 0.3),
+            color: Theme.of(context).colorScheme.primaryContainer.withOpacity( 0.3),
             borderRadius: BorderRadius.circular(12),
           ),
           child: Column(
@@ -490,7 +490,7 @@ class _WorkoutComparisonWidgetState extends ConsumerState<WorkoutComparisonWidge
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                   decoration: BoxDecoration(
-                    color: Colors.blue.withValues(alpha: 0.1),
+                    color: Colors.blue.withOpacity( 0.1),
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: Text(value1, style: Theme.of(context).textTheme.bodySmall),
@@ -505,7 +505,7 @@ class _WorkoutComparisonWidgetState extends ConsumerState<WorkoutComparisonWidge
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                   decoration: BoxDecoration(
-                    color: Colors.green.withValues(alpha: 0.1),
+                    color: Colors.green.withOpacity( 0.1),
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: Text(value2, style: Theme.of(context).textTheme.bodySmall),
@@ -520,8 +520,8 @@ class _WorkoutComparisonWidgetState extends ConsumerState<WorkoutComparisonWidge
               color: isNeutral 
                   ? Theme.of(context).colorScheme.surfaceContainerHighest
                   : isImprovement 
-                      ? Colors.green.withValues(alpha: 0.1)
-                      : Colors.red.withValues(alpha: 0.1),
+                      ? Colors.green.withOpacity( 0.1)
+                      : Colors.red.withOpacity( 0.1),
               borderRadius: BorderRadius.circular(4),
             ),
             child: Row(
@@ -567,7 +567,7 @@ class _WorkoutComparisonWidgetState extends ConsumerState<WorkoutComparisonWidge
       decoration: BoxDecoration(
         border: Border.all(color: accentColor),
         borderRadius: BorderRadius.circular(8),
-        color: accentColor.withValues(alpha: 0.05),
+        color: accentColor.withOpacity( 0.05),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
