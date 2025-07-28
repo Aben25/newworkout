@@ -459,17 +459,25 @@ class _WorkoutLibraryScreenState extends ConsumerState<WorkoutLibraryScreen>
     );
   }
 
-  void _startWorkout(Workout workout) {
-    // TODO: Implement starting workout
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Starting ${workout.name ?? 'workout'}...'),
-        action: SnackBarAction(
-          label: 'View',
-          onPressed: () => _showWorkoutDetail(workout),
-        ),
-      ),
-    );
+  void _startWorkout(Workout workout) async {
+    try {
+      final workoutNotifier = ref.read(workoutNotifierProvider.notifier);
+      await workoutNotifier.startWorkout(workout.id);
+      
+      if (mounted) {
+        // Navigate directly to workout session screen
+        context.push('/workout-session/${workout.id}');
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Failed to start workout: $e'),
+            backgroundColor: Theme.of(context).colorScheme.error,
+          ),
+        );
+      }
+    }
   }
 
   void _editWorkout(Workout workout) {

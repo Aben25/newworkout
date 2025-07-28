@@ -44,13 +44,14 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
         ),
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
                 const SizedBox(height: 16),
                 
                 // Welcome text
@@ -67,7 +68,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                 Text(
                   'Create your account to start tracking your fitness journey',
                   style: theme.textTheme.bodyLarge?.copyWith(
-                    color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
+                    color: theme.colorScheme.onSurface.withOpacity( 0.7),
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -273,7 +274,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                   label: const Text('Continue with Apple'),
                 ),
                 
-                const Spacer(),
+                const SizedBox(height: 32),
                 
                 // Sign in link
                 Row(
@@ -286,7 +287,11 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                     ),
                   ],
                 ),
-              ],
+                
+                // Extra bottom padding to prevent overflow
+                const SizedBox(height: 40),
+                ],
+              ),
             ),
           ),
         ),

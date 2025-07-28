@@ -217,7 +217,7 @@ class ProfileStatCard extends StatelessWidget {
                 child: Text(
                   title,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: textColor.withValues(alpha: 0.8),
+                    color: textColor.withOpacity( 0.8),
                   ),
                 ),
               ),
@@ -236,7 +236,7 @@ class ProfileStatCard extends StatelessWidget {
             Text(
               subtitle!,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: textColor.withValues(alpha: 0.7),
+                color: textColor.withOpacity( 0.7),
               ),
             ),
           ],

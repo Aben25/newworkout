@@ -217,7 +217,7 @@ class _WorkoutBuilderScreenState extends ConsumerState<WorkoutBuilderScreen> {
                 color: theme.colorScheme.surface,
                 border: Border(
                   bottom: BorderSide(
-                    color: theme.colorScheme.outline.withValues(alpha: 0.2),
+                    color: theme.colorScheme.outline.withOpacity( 0.2),
                     width: 1,
                   ),
                 ),
@@ -282,7 +282,13 @@ class _WorkoutBuilderScreenState extends ConsumerState<WorkoutBuilderScreen> {
           FloatingActionButton(
             heroTag: 'add_exercise',
             onPressed: _showExerciseSelector,
-            child: const Icon(Icons.add),
+            elevation: 8,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            backgroundColor: theme.colorScheme.secondary,
+            foregroundColor: theme.colorScheme.onSecondary,
+            child: const Icon(Icons.add, size: 28),
           ),
           const SizedBox(height: 16),
           
@@ -290,16 +296,37 @@ class _WorkoutBuilderScreenState extends ConsumerState<WorkoutBuilderScreen> {
           FloatingActionButton.extended(
             heroTag: 'save_workout',
             onPressed: _exercises.isEmpty || _isSaving ? null : _saveWorkout,
+            elevation: 8,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(24),
+            ),
+            backgroundColor: _exercises.isEmpty || _isSaving 
+                ? theme.colorScheme.outline.withOpacity(0.3)
+                : theme.colorScheme.primary,
+            foregroundColor: _exercises.isEmpty || _isSaving
+                ? theme.colorScheme.onSurface.withOpacity(0.5)
+                : theme.colorScheme.onPrimary,
             icon: _isSaving
-                ? const SizedBox(
+                ? SizedBox(
                     width: 20,
                     height: 20,
-                    child: CircularProgressIndicator(strokeWidth: 2),
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        theme.colorScheme.onPrimary,
+                      ),
+                    ),
                   )
-                : const Icon(Icons.save),
-            label: Text(_isSaving 
-                ? 'Saving...' 
-                : (_isEditing ? 'Update Workout' : 'Save Workout')),
+                : const Icon(Icons.save, size: 24),
+            label: Text(
+              _isSaving 
+                  ? 'Saving...' 
+                  : (_isEditing ? 'Update Workout' : 'Save Workout'),
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 16,
+              ),
+            ),
           ),
         ],
       ),
@@ -312,29 +339,103 @@ class _WorkoutBuilderScreenState extends ConsumerState<WorkoutBuilderScreen> {
     final totalSets = _exercises.fold(0, (sum, ex) => sum + ex.sets);
     final estimatedDuration = _calculateEstimatedDuration();
     
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
-        borderRadius: BorderRadius.circular(12),
+    return Card(
+      elevation: 4,
+      shadowColor: theme.colorScheme.shadow.withOpacity(0.1),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              theme.colorScheme.primaryContainer.withOpacity(0.1),
+              theme.colorScheme.secondaryContainer.withOpacity(0.1),
+            ],
+          ),
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            _buildModernStatItem(
+              icon: Icons.fitness_center,
+              label: 'Exercises',
+              value: totalExercises.toString(),
+              color: theme.colorScheme.primary,
+            ),
+            Container(
+              width: 1,
+              height: 40,
+              color: theme.colorScheme.outline.withOpacity(0.2),
+            ),
+            _buildModernStatItem(
+              icon: Icons.repeat,
+              label: 'Sets',
+              value: totalSets.toString(),
+              color: theme.colorScheme.secondary,
+            ),
+            Container(
+              width: 1,
+              height: 40,
+              color: theme.colorScheme.outline.withOpacity(0.2),
+            ),
+            _buildModernStatItem(
+              icon: Icons.timer,
+              label: 'Duration',
+              value: '${estimatedDuration}min',
+              color: theme.colorScheme.tertiary,
+            ),
+          ],
+        ),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+    );
+  }
+
+  Widget _buildModernStatItem({
+    required IconData icon,
+    required String label,
+    required String value,
+    required Color color,
+  }) {
+    final theme = Theme.of(context);
+    
+    return Expanded(
+      child: Column(
         children: [
-          _buildStatItem(
-            icon: Icons.fitness_center,
-            label: 'Exercises',
-            value: totalExercises.toString(),
+          Container(
+            width: 48,
+            height: 48,
+            decoration: BoxDecoration(
+              color: color.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(
+                color: color.withOpacity(0.2),
+                width: 1,
+              ),
+            ),
+            child: Icon(
+              icon,
+              color: color,
+              size: 24,
+            ),
           ),
-          _buildStatItem(
-            icon: Icons.repeat,
-            label: 'Sets',
-            value: totalSets.toString(),
+          const SizedBox(height: 8),
+          Text(
+            value,
+            style: theme.textTheme.titleLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: color,
+            ),
           ),
-          _buildStatItem(
-            icon: Icons.timer,
-            label: 'Duration',
-            value: '${estimatedDuration}min',
+          const SizedBox(height: 2),
+          Text(
+            label,
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: theme.colorScheme.onSurfaceVariant,
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ],
       ),
@@ -654,12 +755,12 @@ class _WorkoutBuilderScreenState extends ConsumerState<WorkoutBuilderScreen> {
       }).toList();
 
       if (_isEditing && _originalWorkout != null) {
-        // Update existing workout
+        // Update existing workout (excluding description field as it doesn't exist in DB)
         await WorkoutService.instance.updateWorkout(
           _originalWorkout!.id,
           {
             'name': name,
-            'description': description.isEmpty ? null : description,
+            // 'description': description.isEmpty ? null : description, // Column doesn't exist in Supabase table
           },
         );
         
@@ -785,7 +886,7 @@ class WorkoutBuilderExercise {
   String get formattedWeight {
     if (weight == null || weight!.isEmpty) return 'Bodyweight';
     
-    if (weight!.every((w) => w == weight!.first)) {
+    if (weight!.isNotEmpty && weight!.every((w) => w == weight!.first)) {
       return '${weight!.first.toStringAsFixed(1)}kg';
     } else {
       return weight!.map((w) => '${w.toStringAsFixed(1)}kg').join(' / ');

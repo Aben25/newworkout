@@ -40,7 +40,7 @@ class HomeScreen extends ConsumerWidget {
                         width: 40,
                         height: 40,
                         decoration: BoxDecoration(
-                          color: theme.colorScheme.primary.withValues(alpha: 0.1),
+                          color: theme.colorScheme.primary.withOpacity( 0.1),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Icon(
@@ -64,7 +64,7 @@ class HomeScreen extends ConsumerWidget {
                             Text(
                               'Ready to start your workout?',
                               style: theme.textTheme.bodySmall?.copyWith(
-                                color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
+                                color: theme.colorScheme.onSurface.withOpacity( 0.7),
                               ),
                             ),
                           ],
@@ -180,7 +180,7 @@ class HomeScreen extends ConsumerWidget {
                       Text(
                         'Track progress, sync data, and get personalized workouts',
                         style: theme.textTheme.bodySmall?.copyWith(
-                          color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
+                          color: theme.colorScheme.onSurface.withOpacity( 0.7),
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -200,7 +200,7 @@ class HomeScreen extends ConsumerWidget {
                   width: double.infinity,
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: Colors.green.withValues(alpha: 0.1),
+                    color: Colors.green.withOpacity( 0.1),
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(color: Colors.green, width: 1),
                   ),
@@ -221,7 +221,7 @@ class HomeScreen extends ConsumerWidget {
                             Text(
                               'Your data is backed up securely',
                               style: theme.textTheme.bodySmall?.copyWith(
-                                color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
+                                color: theme.colorScheme.onSurface.withOpacity( 0.7),
                                 fontSize: 11,
                               ),
                             ),
@@ -262,7 +262,7 @@ class HomeScreen extends ConsumerWidget {
                 width: 36,
                 height: 36,
                 decoration: BoxDecoration(
-                  color: color.withValues(alpha: 0.1),
+                  color: color.withOpacity( 0.1),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Icon(
@@ -285,7 +285,7 @@ class HomeScreen extends ConsumerWidget {
               Text(
                 subtitle,
                 style: theme.textTheme.bodySmall?.copyWith(
-                  color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
+                  color: theme.colorScheme.onSurface.withOpacity( 0.7),
                   fontSize: 11,
                 ),
                 textAlign: TextAlign.center,

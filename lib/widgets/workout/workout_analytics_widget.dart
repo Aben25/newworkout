@@ -220,7 +220,7 @@ class WorkoutAnalyticsWidget extends StatelessWidget {
                   borderData: FlBorderData(
                     show: true,
                     border: Border.all(
-                      color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
+                      color: Theme.of(context).colorScheme.outline.withOpacity( 0.3),
                     ),
                   ),
                   lineBarsData: [
@@ -247,7 +247,7 @@ class WorkoutAnalyticsWidget extends StatelessWidget {
                       ),
                       belowBarData: BarAreaData(
                         show: true,
-                        color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
+                        color: Theme.of(context).colorScheme.primary.withOpacity( 0.1),
                       ),
                     ),
                   ],

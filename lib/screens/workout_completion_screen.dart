@@ -139,7 +139,7 @@ class _WorkoutCompletionScreenState extends ConsumerState<WorkoutCompletionScree
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
-                        color: AppTheme.successColor.withValues(alpha: 0.3),
+                        color: AppTheme.successColor.withOpacity( 0.3),
                         blurRadius: 20,
                         spreadRadius: 5,
                       ),
@@ -168,7 +168,7 @@ class _WorkoutCompletionScreenState extends ConsumerState<WorkoutCompletionScree
                 Text(
                   session.workout.name ?? 'Great workout',
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.8),
+                    color: Theme.of(context).colorScheme.onSurface.withOpacity( 0.8),
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -472,7 +472,7 @@ class _WorkoutCompletionScreenState extends ConsumerState<WorkoutCompletionScree
                 Text(
                   '${exerciseLog.completedSets} sets • ${exerciseLog.totalReps} reps • ${exerciseLog.totalVolume.toStringAsFixed(0)}kg',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+                    color: Theme.of(context).colorScheme.onSurface.withOpacity( 0.7),
                   ),
                 ),
               ],

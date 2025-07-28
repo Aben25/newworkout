@@ -120,7 +120,7 @@ class _AnimatedMultiSelectChipsState extends State<AnimatedMultiSelectChips>
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
-              color: theme.colorScheme.primaryContainer.withValues(alpha: 0.5),
+              color: theme.colorScheme.primaryContainer.withOpacity( 0.5),
               borderRadius: BorderRadius.circular(16),
             ),
             child: Text(
@@ -194,8 +194,8 @@ class _AnimatedMultiSelectChipsState extends State<AnimatedMultiSelectChips>
           gradient: isSelected
               ? LinearGradient(
                   colors: [
-                    color.withValues(alpha: 0.2),
-                    color.withValues(alpha: 0.1),
+                    color.withOpacity( 0.2),
+                    color.withOpacity( 0.1),
                   ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
@@ -204,21 +204,21 @@ class _AnimatedMultiSelectChipsState extends State<AnimatedMultiSelectChips>
           color: isSelected
               ? null
               : isDisabled
-                  ? theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5)
+                  ? theme.colorScheme.surfaceContainerHighest.withOpacity( 0.5)
                   : theme.colorScheme.surface,
           border: Border.all(
             color: isSelected
                 ? color
                 : isDisabled
-                    ? theme.colorScheme.outline.withValues(alpha: 0.3)
-                    : theme.colorScheme.outline.withValues(alpha: 0.5),
+                    ? theme.colorScheme.outline.withOpacity( 0.3)
+                    : theme.colorScheme.outline.withOpacity( 0.5),
             width: isSelected ? 2 : 1,
           ),
           borderRadius: BorderRadius.circular(16),
           boxShadow: isSelected
               ? [
                   BoxShadow(
-                    color: color.withValues(alpha: 0.3),
+                    color: color.withOpacity( 0.3),
                     blurRadius: 8,
                     spreadRadius: 1,
                     offset: const Offset(0, 2),
@@ -226,7 +226,7 @@ class _AnimatedMultiSelectChipsState extends State<AnimatedMultiSelectChips>
                 ]
               : [
                   BoxShadow(
-                    color: theme.colorScheme.shadow.withValues(alpha: 0.1),
+                    color: theme.colorScheme.shadow.withOpacity( 0.1),
                     blurRadius: 4,
                     offset: const Offset(0, 2),
                   ),
@@ -242,7 +242,7 @@ class _AnimatedMultiSelectChipsState extends State<AnimatedMultiSelectChips>
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
                   color: isSelected
-                      ? color.withValues(alpha: 0.2)
+                      ? color.withOpacity( 0.2)
                       : Colors.transparent,
                   shape: BoxShape.circle,
                 ),
@@ -252,7 +252,7 @@ class _AnimatedMultiSelectChipsState extends State<AnimatedMultiSelectChips>
                   color: isSelected
                       ? color
                       : isDisabled
-                          ? theme.colorScheme.onSurfaceVariant.withValues(alpha: 0.5)
+                          ? theme.colorScheme.onSurfaceVariant.withOpacity( 0.5)
                           : theme.colorScheme.onSurfaceVariant,
                 ),
               ),
@@ -267,7 +267,7 @@ class _AnimatedMultiSelectChipsState extends State<AnimatedMultiSelectChips>
                 color: isSelected
                     ? color
                     : isDisabled
-                        ? theme.colorScheme.onSurfaceVariant.withValues(alpha: 0.5)
+                        ? theme.colorScheme.onSurfaceVariant.withOpacity( 0.5)
                         : theme.colorScheme.onSurface,
               ),
               textAlign: TextAlign.center,
@@ -280,9 +280,9 @@ class _AnimatedMultiSelectChipsState extends State<AnimatedMultiSelectChips>
                 description,
                 style: theme.textTheme.bodySmall?.copyWith(
                   color: isSelected
-                      ? color.withValues(alpha: 0.8)
+                      ? color.withOpacity( 0.8)
                       : isDisabled
-                          ? theme.colorScheme.onSurfaceVariant.withValues(alpha: 0.4)
+                          ? theme.colorScheme.onSurfaceVariant.withOpacity( 0.4)
                           : theme.colorScheme.onSurfaceVariant,
                 ),
                 textAlign: TextAlign.center,
@@ -320,7 +320,7 @@ class _AnimatedMultiSelectChipsState extends State<AnimatedMultiSelectChips>
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: isDisabled
-                              ? theme.colorScheme.outline.withValues(alpha: 0.3)
+                              ? theme.colorScheme.outline.withOpacity( 0.3)
                               : theme.colorScheme.outline,
                         ),
                         shape: BoxShape.circle,
@@ -424,13 +424,13 @@ class _EnhancedLevelSliderState extends State<EnhancedLevelSlider>
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      activeColor.withValues(alpha: 0.2),
-                      activeColor.withValues(alpha: 0.1),
+                      activeColor.withOpacity( 0.2),
+                      activeColor.withOpacity( 0.1),
                     ],
                   ),
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(
-                    color: activeColor.withValues(alpha: 0.4),
+                    color: activeColor.withOpacity( 0.4),
                     width: 2,
                   ),
                 ),
@@ -483,10 +483,10 @@ class _EnhancedLevelSliderState extends State<EnhancedLevelSlider>
             overlayShape: const RoundSliderOverlayShape(overlayRadius: 20),
             activeTrackColor: activeColor,
             thumbColor: activeColor,
-            overlayColor: activeColor.withValues(alpha: 0.2),
+            overlayColor: activeColor.withOpacity( 0.2),
             tickMarkShape: const RoundSliderTickMarkShape(tickMarkRadius: 3),
             activeTickMarkColor: activeColor,
-            inactiveTickMarkColor: theme.colorScheme.outline.withValues(alpha: 0.3),
+            inactiveTickMarkColor: theme.colorScheme.outline.withOpacity( 0.3),
           ),
           child: Slider(
             value: widget.value,
@@ -516,12 +516,12 @@ class _EnhancedLevelSliderState extends State<EnhancedLevelSlider>
                     padding: const EdgeInsets.all(6),
                     decoration: BoxDecoration(
                       color: isActive
-                          ? levelColor.withValues(alpha: 0.2)
+                          ? levelColor.withOpacity( 0.2)
                           : Colors.transparent,
                       shape: BoxShape.circle,
                       border: isActive
                           ? Border.all(
-                              color: levelColor.withValues(alpha: 0.5),
+                              color: levelColor.withOpacity( 0.5),
                             )
                           : null,
                     ),

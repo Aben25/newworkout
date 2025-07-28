@@ -107,7 +107,7 @@ class _CalendarHeatmapWidgetState extends ConsumerState<CalendarHeatmapWidget>
         color: Theme.of(context).colorScheme.surfaceContainerLowest,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+          color: Theme.of(context).colorScheme.outline.withOpacity( 0.2),
         ),
       ),
       child: Column(
@@ -229,7 +229,7 @@ class _CalendarHeatmapWidgetState extends ConsumerState<CalendarHeatmapWidget>
         color: Theme.of(context).colorScheme.surfaceContainerLowest,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+          color: Theme.of(context).colorScheme.outline.withOpacity( 0.2),
         ),
       ),
       child: Center(
@@ -314,7 +314,7 @@ class _CalendarHeatmapWidgetState extends ConsumerState<CalendarHeatmapWidget>
     }
     
     return Color.lerp(
-      Theme.of(context).colorScheme.primary.withValues(alpha: 0.2),
+      Theme.of(context).colorScheme.primary.withOpacity( 0.2),
       Theme.of(context).colorScheme.primary,
       intensity,
     )!;

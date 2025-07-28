@@ -52,8 +52,8 @@ class _SocialShareWidgetState extends State<SocialShareWidget> {
           borderRadius: BorderRadius.circular(12),
           gradient: LinearGradient(
             colors: [
-              Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
-              Theme.of(context).colorScheme.primary.withValues(alpha: 0.05),
+              Theme.of(context).colorScheme.primary.withOpacity( 0.1),
+              Theme.of(context).colorScheme.primary.withOpacity( 0.05),
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -91,7 +91,7 @@ class _SocialShareWidgetState extends State<SocialShareWidget> {
                   color: Theme.of(context).colorScheme.surfaceContainerHighest,
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(
-                    color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+                    color: Theme.of(context).colorScheme.outline.withOpacity( 0.2),
                   ),
                 ),
                 child: Column(
@@ -341,7 +341,7 @@ class _SocialShareWidgetState extends State<SocialShareWidget> {
               Text(
                 '+ ${widget.unlockedAchievements.length - 3} more achievements',
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+                  color: Theme.of(context).colorScheme.onSurface.withOpacity( 0.7),
                 ),
               ),
             ],

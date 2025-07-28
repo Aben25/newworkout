@@ -77,7 +77,7 @@ class OnboardingProgressIndicator extends StatelessWidget {
                             gradient: LinearGradient(
                               colors: [
                                 theme.colorScheme.primary,
-                                theme.colorScheme.primary.withValues(alpha: 0.8),
+                                theme.colorScheme.primary.withOpacity( 0.8),
                               ],
                             ),
                           ),
@@ -138,7 +138,7 @@ class OnboardingProgressIndicator extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: theme.colorScheme.primary.withValues(alpha: 0.3),
+                  color: theme.colorScheme.primary.withOpacity( 0.3),
                   width: 2,
                 ),
               ),
@@ -158,7 +158,7 @@ class OnboardingProgressIndicator extends StatelessWidget {
               boxShadow: isCompleted || isCurrent
                   ? [
                       BoxShadow(
-                        color: theme.colorScheme.primary.withValues(alpha: 0.3),
+                        color: theme.colorScheme.primary.withOpacity( 0.3),
                         blurRadius: 8,
                         spreadRadius: 2,
                       ),

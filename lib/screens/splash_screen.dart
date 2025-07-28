@@ -83,7 +83,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                         borderRadius: BorderRadius.circular(24),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withValues(alpha: 0.2),
+                            color: Colors.black.withOpacity( 0.2),
                             blurRadius: 20,
                             offset: const Offset(0, 10),
                           ),
@@ -108,7 +108,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                     Text(
                       'Your fitness journey starts here',
                       style: theme.textTheme.bodyLarge?.copyWith(
-                        color: Colors.white.withValues(alpha: 0.8),
+                        color: Colors.white.withOpacity( 0.8),
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -118,7 +118,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                       height: 40,
                       child: CircularProgressIndicator(
                         valueColor: AlwaysStoppedAnimation<Color>(
-                          Colors.white.withValues(alpha: 0.8),
+                          Colors.white.withOpacity( 0.8),
                         ),
                         strokeWidth: 3,
                       ),

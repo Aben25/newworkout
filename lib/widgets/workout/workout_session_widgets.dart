@@ -183,7 +183,7 @@ class _ExerciseTimerWidgetState extends State<ExerciseTimerWidget>
                               Text(
                                 'remaining',
                                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                  color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+                                  color: Theme.of(context).colorScheme.onSurface.withOpacity( 0.7),
                                 ),
                               ),
                           ],
@@ -373,10 +373,10 @@ class _SetLoggerWidgetState extends State<SetLoggerWidget>
       _weightController.text = lastSet.weight.toString();
     } else {
       // Load from workout exercise configuration
-      if (widget.workoutExercise.reps?.isNotEmpty == true) {
+      if (widget.workoutExercise.reps != null && widget.workoutExercise.reps!.isNotEmpty) {
         _repsController.text = widget.workoutExercise.reps!.first.toString();
       }
-      if (widget.workoutExercise.weight?.isNotEmpty == true) {
+      if (widget.workoutExercise.weight != null && widget.workoutExercise.weight!.isNotEmpty) {
         _weightController.text = widget.workoutExercise.weight!.first.toString();
       }
     }
@@ -431,7 +431,7 @@ class _SetLoggerWidgetState extends State<SetLoggerWidget>
                             Text(
                               'Log your performance',
                               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+                                color: Theme.of(context).colorScheme.onSurface.withOpacity( 0.7),
                               ),
                             ),
                           ],
@@ -922,7 +922,7 @@ class WorkoutTimerWidget extends StatelessWidget {
             size: 16,
             color: isActive
                 ? Theme.of(context).colorScheme.onPrimaryContainer
-                : Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+                : Theme.of(context).colorScheme.onSurface.withOpacity( 0.7),
           ),
           const SizedBox(width: 4),
           Text(
@@ -931,7 +931,7 @@ class WorkoutTimerWidget extends StatelessWidget {
               fontWeight: FontWeight.w600,
               color: isActive
                   ? Theme.of(context).colorScheme.onPrimaryContainer
-                  : Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+                  : Theme.of(context).colorScheme.onSurface.withOpacity( 0.7),
             ),
           ),
         ],

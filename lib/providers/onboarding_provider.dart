@@ -11,6 +11,14 @@ import 'auth_provider.dart';
 class OnboardingNotifier extends StateNotifier<OnboardingState> {
   OnboardingNotifier(this._ref) : super(OnboardingState()) {
     _loadOnboardingState();
+    
+    // Listen for profile changes and refresh onboarding data
+    _ref.listen<UserProfile?>(userProfileProvider, (previous, next) {
+      if (next != null && (previous == null || previous != next)) {
+        _logger.d('Profile data changed, refreshing onboarding data');
+        _refreshOnboardingFromProfile(next);
+      }
+    });
   }
 
   final Ref _ref;
@@ -121,6 +129,24 @@ class OnboardingNotifier extends StateNotifier<OnboardingState> {
     }
     
     return data;
+  }
+
+  // Refresh onboarding data when profile changes
+  void _refreshOnboardingFromProfile(UserProfile profile) {
+    try {
+      final profileData = _extractProfileDataForOnboarding(profile);
+      if (profileData.isNotEmpty) {
+        final mergedStepData = <String, dynamic>{};
+        mergedStepData.addAll(profileData); // Profile data as base
+        mergedStepData.addAll(state.stepData); // Current onboarding data takes precedence
+        
+        state = state.copyWith(stepData: mergedStepData);
+        _saveOnboardingState();
+        _logger.i('Refreshed onboarding data from profile changes');
+      }
+    } catch (e) {
+      _logger.e('Error refreshing onboarding from profile: $e');
+    }
   }
 
   // Save onboarding state to local storage
@@ -326,14 +352,11 @@ class OnboardingNotifier extends StateNotifier<OnboardingState> {
     final userProfile = _ref.read(userProfileProvider);
     
     if (userProfile != null) {
-      final profileData = _extractProfileDataForOnboarding(userProfile);
-      final mergedStepData = <String, dynamic>{};
-      mergedStepData.addAll(profileData); // Profile data as base
-      mergedStepData.addAll(state.stepData); // Current onboarding data takes precedence
-      
-      state = state.copyWith(stepData: mergedStepData);
-      await _saveOnboardingState();
-      _logger.i('Refreshed onboarding data from profile');
+      _refreshOnboardingFromProfile(userProfile);
+      await _saveOnboardingState(); // Ensure it's saved after manual refresh
+      _logger.i('Manually refreshed onboarding data from profile');
+    } else {
+      _logger.w('No profile available to refresh from');
     }
   }
 
@@ -365,6 +388,8 @@ class OnboardingNotifier extends StateNotifier<OnboardingState> {
     final currentStep = OnboardingStepExtension.fromIndex(state.currentStep);
     
     switch (currentStep) {
+      case OnboardingStep.welcome:
+        return true; // Welcome screen is always valid
       case OnboardingStep.personalInfo:
         return _isPersonalInfoValid();
       case OnboardingStep.fitnessGoals:
@@ -407,9 +432,10 @@ class OnboardingNotifier extends StateNotifier<OnboardingState> {
 
   bool _isPreferencesValid() {
     final data = state.stepData;
-    return data['workoutDays'] != null &&
-           data['workoutDuration'] != null &&
-           data['workoutFrequency'] != null;
+    final workoutDays = data['workoutDays'] as List<String>?;
+    // Only require workout days to be selected for now
+    // Duration and frequency can be set later
+    return workoutDays != null && workoutDays.isNotEmpty;
   }
 
   // Get current step enum
@@ -421,6 +447,9 @@ class OnboardingNotifier extends StateNotifier<OnboardingState> {
     final data = <String, dynamic>{};
     
     switch (currentStep) {
+      case OnboardingStep.welcome:
+        // No data to collect from welcome screen
+        break;
       case OnboardingStep.personalInfo:
         data['displayName'] = state.stepData['displayName'];
         data['age'] = state.stepData['age'];

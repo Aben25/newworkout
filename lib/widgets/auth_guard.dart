@@ -55,7 +55,7 @@ class _LoadingScreen extends StatelessWidget {
             Text(
               'Loading...',
               style: theme.textTheme.titleMedium?.copyWith(
-                color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
+                color: theme.colorScheme.onSurface.withOpacity( 0.7),
               ),
             ),
           ],
@@ -99,7 +99,7 @@ class _UnauthenticatedScreen extends StatelessWidget {
               Text(
                 'You need to sign in to access this feature. Create an account or sign in to continue.',
                 style: theme.textTheme.bodyLarge?.copyWith(
-                  color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
+                  color: theme.colorScheme.onSurface.withOpacity( 0.7),
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -169,7 +169,7 @@ class _ErrorScreen extends StatelessWidget {
               Text(
                 error,
                 style: theme.textTheme.bodyLarge?.copyWith(
-                  color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
+                  color: theme.colorScheme.onSurface.withOpacity( 0.7),
                 ),
                 textAlign: TextAlign.center,
               ),

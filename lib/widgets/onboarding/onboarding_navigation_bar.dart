@@ -4,6 +4,7 @@ class OnboardingNavigationBar extends StatelessWidget {
   final bool canGoBack;
   final bool canGoNext;
   final bool isLastStep;
+  final bool canComplete;
   final VoidCallback onBack;
   final VoidCallback onNext;
   final VoidCallback onComplete;
@@ -13,6 +14,7 @@ class OnboardingNavigationBar extends StatelessWidget {
     required this.canGoBack,
     required this.canGoNext,
     required this.isLastStep,
+    this.canComplete = true,
     required this.onBack,
     required this.onNext,
     required this.onComplete,
@@ -28,7 +30,7 @@ class OnboardingNavigationBar extends StatelessWidget {
         color: theme.colorScheme.surface,
         border: Border(
           top: BorderSide(
-            color: theme.colorScheme.outline.withValues(alpha: 0.2),
+            color: theme.colorScheme.outline.withOpacity(0.2),
             width: 1,
           ),
         ),
@@ -79,7 +81,7 @@ class OnboardingNavigationBar extends StatelessWidget {
                 child: isLastStep
                     ? ElevatedButton(
                         key: const ValueKey('complete'),
-                        onPressed: canGoNext ? onComplete : null,
+                        onPressed: canComplete ? onComplete : null,
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 16),
                           backgroundColor: theme.colorScheme.primary,
@@ -100,7 +102,7 @@ class OnboardingNavigationBar extends StatelessWidget {
                             Icon(
                               Icons.check_circle,
                               size: 18,
-                              color: canGoNext 
+                              color: canComplete 
                                   ? theme.colorScheme.onPrimary
                                   : theme.colorScheme.onSurfaceVariant,
                             ),

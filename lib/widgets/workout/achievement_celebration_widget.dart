@@ -84,7 +84,7 @@ class _AchievementCelebrationWidgetState extends State<AchievementCelebrationWid
             return Transform.scale(
               scale: _bounceAnimation.value,
               child: Card(
-                color: Colors.orange.withValues(alpha: 0.1),
+                color: Colors.orange.withOpacity( 0.1),
                 child: Padding(
                   padding: const EdgeInsets.all(24),
                   child: Column(
@@ -163,8 +163,8 @@ class _AchievementCelebrationWidgetState extends State<AchievementCelebrationWid
           borderRadius: BorderRadius.circular(12),
           gradient: LinearGradient(
             colors: [
-              _getRarityColor(achievement.rarity).withValues(alpha: 0.1),
-              _getRarityColor(achievement.rarity).withValues(alpha: 0.05),
+              _getRarityColor(achievement.rarity).withOpacity( 0.1),
+              _getRarityColor(achievement.rarity).withOpacity( 0.05),
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -183,7 +183,7 @@ class _AchievementCelebrationWidgetState extends State<AchievementCelebrationWid
                   shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
-                      color: _getRarityColor(achievement.rarity).withValues(alpha: 0.3),
+                      color: _getRarityColor(achievement.rarity).withOpacity( 0.3),
                       blurRadius: 12,
                       spreadRadius: 2,
                     ),
@@ -237,7 +237,7 @@ class _AchievementCelebrationWidgetState extends State<AchievementCelebrationWid
                     Text(
                       achievement.description,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+                        color: Theme.of(context).colorScheme.onSurface.withOpacity( 0.7),
                       ),
                     ),
                     
@@ -262,7 +262,7 @@ class _AchievementCelebrationWidgetState extends State<AchievementCelebrationWid
                         Text(
                           userAchievement.formattedUnlockDate,
                           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5),
+                            color: Theme.of(context).colorScheme.onSurface.withOpacity( 0.5),
                           ),
                         ),
                       ],

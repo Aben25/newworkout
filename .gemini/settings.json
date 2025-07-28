@@ -1,0 +1,57 @@
+{
+  "mcpServers": {
+    "myFlutterApp": {
+      "httpUrl": "http://localhost:8080/mcp",
+      "trust": true
+    },
+    "supabase_openfit_mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@supabase/mcp-server-supabase@latest",
+        "--access-token",
+        "sbp_47388aad6188125c532f9611896262b5ba86c849"
+      ],
+      "disabled": false,
+      "autoApprove": [
+        "list_organizations",
+        "get_organization",
+        "list_projects",
+        "get_project",
+        "list_branches",
+        "list_tables",
+        "list_extensions",
+        "list_migrations",
+        "get_user",
+        "list_users",
+        "list_edge_functions",
+        "get_logs",
+        "get_advisors",
+        "get_project_url",
+        "get_anon_key",
+        "generate_typescript_types",
+        "search_docs",
+        "list_tables",
+        "execute_sql"
+      ]
+    },
+    "ios-simulator": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "ios-simulator-mcp"
+      ],
+      "disabled": false,
+      "autoApprove": [
+        "get_booted_sim_id",
+        "screenshot",
+        "ui_describe_all",
+        "ui_tap",
+        "ui_view",
+        "*",
+        "ui_type",
+        "ui_swipe"
+      ]
+    }
+  }
+}

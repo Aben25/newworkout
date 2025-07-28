@@ -143,7 +143,7 @@ class _SetRepConfigSheetState extends State<SetRepConfigSheet> {
             height: 4,
             margin: const EdgeInsets.symmetric(vertical: 12),
             decoration: BoxDecoration(
-              color: theme.colorScheme.onSurfaceVariant.withValues(alpha: 0.4),
+              color: theme.colorScheme.onSurfaceVariant.withOpacity( 0.4),
               borderRadius: BorderRadius.circular(2),
             ),
           ),
@@ -217,7 +217,7 @@ class _SetRepConfigSheetState extends State<SetRepConfigSheet> {
               color: theme.colorScheme.surface,
               border: Border(
                 top: BorderSide(
-                  color: theme.colorScheme.outline.withValues(alpha: 0.2),
+                  color: theme.colorScheme.outline.withOpacity( 0.2),
                 ),
               ),
             ),
@@ -563,7 +563,7 @@ class _SetRepConfigSheetState extends State<SetRepConfigSheet> {
             width: double.infinity,
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+              color: theme.colorScheme.surfaceContainerHighest.withOpacity( 0.3),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(

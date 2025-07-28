@@ -26,7 +26,7 @@ class OnboardingState extends HiveObject {
 
   OnboardingState({
     this.currentStep = 0,
-    this.totalSteps = 5,
+    this.totalSteps = 6,
     this.isCompleted = false,
     this.stepData = const {},
     this.lastUpdated,
@@ -88,6 +88,7 @@ class OnboardingState extends HiveObject {
 }
 
 enum OnboardingStep {
+  welcome,
   personalInfo,
   fitnessGoals,
   fitnessLevel,
@@ -98,6 +99,8 @@ enum OnboardingStep {
 extension OnboardingStepExtension on OnboardingStep {
   String get title {
     switch (this) {
+      case OnboardingStep.welcome:
+        return 'Welcome';
       case OnboardingStep.personalInfo:
         return 'Personal Information';
       case OnboardingStep.fitnessGoals:
@@ -113,6 +116,8 @@ extension OnboardingStepExtension on OnboardingStep {
 
   String get description {
     switch (this) {
+      case OnboardingStep.welcome:
+        return 'Your AI Personal Trainer Awaits';
       case OnboardingStep.personalInfo:
         return 'Tell us about yourself';
       case OnboardingStep.fitnessGoals:
@@ -128,33 +133,37 @@ extension OnboardingStepExtension on OnboardingStep {
 
   int get index {
     switch (this) {
-      case OnboardingStep.personalInfo:
+      case OnboardingStep.welcome:
         return 0;
-      case OnboardingStep.fitnessGoals:
+      case OnboardingStep.personalInfo:
         return 1;
-      case OnboardingStep.fitnessLevel:
+      case OnboardingStep.fitnessGoals:
         return 2;
-      case OnboardingStep.equipment:
+      case OnboardingStep.fitnessLevel:
         return 3;
-      case OnboardingStep.preferences:
+      case OnboardingStep.equipment:
         return 4;
+      case OnboardingStep.preferences:
+        return 5;
     }
   }
 
   static OnboardingStep fromIndex(int index) {
     switch (index) {
       case 0:
-        return OnboardingStep.personalInfo;
+        return OnboardingStep.welcome;
       case 1:
-        return OnboardingStep.fitnessGoals;
+        return OnboardingStep.personalInfo;
       case 2:
-        return OnboardingStep.fitnessLevel;
+        return OnboardingStep.fitnessGoals;
       case 3:
-        return OnboardingStep.equipment;
+        return OnboardingStep.fitnessLevel;
       case 4:
+        return OnboardingStep.equipment;
+      case 5:
         return OnboardingStep.preferences;
       default:
-        return OnboardingStep.personalInfo;
+        return OnboardingStep.welcome;
     }
   }
 }

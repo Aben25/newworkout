@@ -8,6 +8,7 @@ import '../providers/auth_provider.dart';
 import '../models/onboarding_state.dart';
 import '../widgets/onboarding/onboarding_progress_indicator.dart';
 import '../widgets/onboarding/onboarding_navigation_bar.dart';
+import 'onboarding/welcome_screen.dart';
 import 'onboarding/personal_info_screen.dart';
 import 'onboarding/fitness_goals_screen.dart';
 import 'onboarding/fitness_level_screen.dart';
@@ -119,77 +120,67 @@ class _OnboardingPageViewState extends ConsumerState<OnboardingPageView>
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         elevation: 0,
-        leading: onboardingState.canGoBack
-            ? IconButton(
-                icon: const Icon(Icons.arrow_back),
-                onPressed: () => onboardingNotifier.previousStep(),
-              )
-            : null,
+        leading: Container(
+          margin: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.primary,
+            shape: BoxShape.circle,
+          ),
+          child: Icon(
+            Icons.fitness_center,
+            color: Theme.of(context).colorScheme.onPrimary,
+            size: 20,
+          ),
+        ),
+        title: Row(
+          children: [
+            const Text(
+                    'OpenFit by OpenFitness',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+          ],
+        ),
         actions: [
-          // Resume button if data is available
-          if (_hasResumeData && onboardingState.currentStep == 0)
-            TextButton.icon(
-              onPressed: () => _showResumeDialog(context, onboardingNotifier),
-              icon: const Icon(Icons.restore, size: 18),
-              label: const Text('Resume'),
-              style: TextButton.styleFrom(
-                foregroundColor: Theme.of(context).colorScheme.primary,
-              ),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.help_outline,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
             ),
-          // Profile data indicator
-          if (onboardingState.currentStep == 0)
-            Consumer(
-              builder: (context, ref, child) {
-                final hasExistingData = ref.watch(hasExistingProfileDataProvider);
-                final profileCompletion = ref.watch(profileCompletionProvider);
-                
-                if (hasExistingData) {
-                  return Container(
-                    margin: const EdgeInsets.only(right: 8),
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.primaryContainer,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Text(
-                      '${(profileCompletion * 100).round()}% complete',
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Theme.of(context).colorScheme.onPrimaryContainer,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  );
-                }
-                return const SizedBox.shrink();
-              },
-            ),
-          if (onboardingState.canSkip)
-            TextButton(
-              onPressed: () => _showSkipDialog(context, onboardingNotifier),
-              child: Text(
-                'Skip',
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
+          ),
         ],
       ),
       body: Column(
         children: [
-          // Progress indicator
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
-            child: OnboardingProgressIndicator(
-              currentStep: onboardingState.currentStep,
-              totalSteps: onboardingState.totalSteps,
-              animation: _progressAnimation,
+          // Simple progress indicator for non-welcome screens
+          if (onboardingState.currentStep > 0)
+            Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Step ${onboardingState.currentStep} of ${onboardingState.totalSteps - 1}',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      fontSize: 14,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  LinearProgressIndicator(
+                    value: (onboardingState.currentStep) / (onboardingState.totalSteps - 1),
+                    backgroundColor: Theme.of(context).colorScheme.outline.withOpacity(0.3),
+                    valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).colorScheme.primary),
+                    minHeight: 4,
+                  ),
+                ],
+              ),
             ),
-          ),
           
           // Page content with enhanced transitions
           Expanded(
@@ -204,6 +195,7 @@ class _OnboardingPageViewState extends ConsumerState<OnboardingPageView>
                       controller: _pageController,
                       physics: const NeverScrollableScrollPhysics(), // Disable swipe navigation
                       children: const [
+                        WelcomeScreen(),
                         PersonalInfoScreen(),
                         FitnessGoalsScreen(),
                         FitnessLevelScreen(),
@@ -217,14 +209,110 @@ class _OnboardingPageViewState extends ConsumerState<OnboardingPageView>
             ),
           ),
           
-          // Navigation bar
-          OnboardingNavigationBar(
-            canGoBack: onboardingState.canGoBack,
-            canGoNext: onboardingState.canGoNext && isCurrentStepValid,
-            isLastStep: onboardingState.isLastStep,
-            onBack: () => onboardingNotifier.previousStep(),
-            onNext: () => _handleNext(onboardingNotifier),
-            onComplete: () => _handleComplete(onboardingNotifier),
+          // Simple navigation bar matching Figma
+          Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Row(
+              children: [
+                // Back button
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: onboardingState.canGoBack 
+                      ? () => onboardingNotifier.previousStep()
+                      : null,
+                    style: OutlinedButton.styleFrom(
+                      side: BorderSide(color: Theme.of(context).colorScheme.primary),
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    child: Text(
+                      'Back',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+                
+                const SizedBox(width: 16),
+                
+                // Continue button
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: (onboardingState.isLastStep && isCurrentStepValid)
+                      ? () => _handleComplete(onboardingNotifier)
+                      : (onboardingState.canGoNext && isCurrentStepValid)
+                        ? () => _handleNext(onboardingNotifier)
+                        : null,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    child: const Text(
+                      'Continue',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          
+          // Bottom links
+          Padding(
+            padding: const EdgeInsets.only(bottom: 16.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    'Learn More',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+                Text(
+                  ' • ',
+                  style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    'How It Works',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+                Text(
+                  ' • ',
+                  style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    'Pricing',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),

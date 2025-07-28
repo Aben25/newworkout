@@ -140,6 +140,12 @@ class WorkoutSessionNotifier extends StateNotifier<WorkoutSessionState> {
         state = const WorkoutSessionState.error('Workout not found');
         return;
       }
+      
+      // Check if workout has exercises
+      if (workoutWithExercises.workoutExercises.isEmpty) {
+        state = const WorkoutSessionState.error('Workout has no exercises');
+        return;
+      }
 
       // Start the workout session using the service
       final startedWorkout = await _workoutSessionService.startWorkoutSession(workoutId);
@@ -187,6 +193,12 @@ class WorkoutSessionNotifier extends StateNotifier<WorkoutSessionState> {
       }
 
       final workout = workoutWithExercises.workout;
+      
+      // Check if workout has exercises
+      if (workoutWithExercises.workoutExercises.isEmpty) {
+        state = const WorkoutSessionState.error('Workout has no exercises');
+        return;
+      }
 
       // Check if workout can be resumed
       if (!workout.canResume) {

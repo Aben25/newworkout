@@ -160,13 +160,13 @@ class _BodyMeasurementChartState extends ConsumerState<BodyMeasurementChart>
           verticalInterval: 1,
           getDrawingHorizontalLine: (value) {
             return FlLine(
-              color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+              color: Theme.of(context).colorScheme.outline.withOpacity( 0.2),
               strokeWidth: 1,
             );
           },
           getDrawingVerticalLine: (value) {
             return FlLine(
-              color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+              color: Theme.of(context).colorScheme.outline.withOpacity( 0.2),
               strokeWidth: 1,
             );
           },
@@ -215,7 +215,7 @@ class _BodyMeasurementChartState extends ConsumerState<BodyMeasurementChart>
         borderData: FlBorderData(
           show: true,
           border: Border.all(
-            color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+            color: Theme.of(context).colorScheme.outline.withOpacity( 0.2),
           ),
         ),
         minX: 0,
@@ -248,7 +248,7 @@ class _BodyMeasurementChartState extends ConsumerState<BodyMeasurementChart>
               show: true,
               color: (_selectedMetric == 'weight' 
                   ? Theme.of(context).colorScheme.primary
-                  : Theme.of(context).colorScheme.secondary).withValues(alpha: 0.1),
+                  : Theme.of(context).colorScheme.secondary).withOpacity( 0.1),
             ),
           ),
         ],
@@ -306,7 +306,7 @@ class _BodyMeasurementChartState extends ConsumerState<BodyMeasurementChart>
         return Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+            color: Theme.of(context).colorScheme.surfaceContainerHighest.withOpacity( 0.3),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Row(
